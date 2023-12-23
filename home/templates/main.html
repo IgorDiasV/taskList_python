@@ -313,7 +313,8 @@
         <div class="modal">
             <button class="fechar">X</button>
             <h3 class="subtitulo">Nova tarefa:</h3>
-            <form action="/addTarefa" method="POST" name="myForm" onsubmit="return validateForm()">
+            <form action="{% url 'addtask'%}" method='POST' id='form_addtask'>
+                {% csrf_token %}
                 <div class="bloco_form"><input type="text" id='titulo' class="input_titulo" placeholder="Título"
                         name="nomes"></div>
                 <div class="bloco_form">
@@ -326,37 +327,37 @@
 
                     <div>
                         <div class="box">
-                            <input id="domingo" type="checkbox" name="domingos">
+                            <input id="domingo" type="checkbox" name="domingo">
                             <span class="check">D</span>
                             <label for="domingo">domingo</label>
                         </div>
                         <div class="box">
-                            <input id="segunda" type="checkbox" name="segundas">
+                            <input id="segunda" type="checkbox" name="segunda">
                             <span class="check">S</span>
                             <label for="segunda">segunda</label>
                         </div>
                         <div class="box">
-                            <input id="terca" type="checkbox" name="tercas">
+                            <input id="terca" type="checkbox" name="terca">
                             <span class="check">T</span>
                             <label for="terca">terça</label>
                         </div>
                         <div class="box">
-                            <input id="quarta" type="checkbox" name="quartas">
+                            <input id="quarta" type="checkbox" name="quarta">
                             <span class="check">Q</span>
                             <label for="quarta">quarta</label>
                         </div>
                         <div class="box">
-                            <input id="quinta" type="checkbox" name="quintas">
+                            <input id="quinta" type="checkbox" name="quinta">
                             <span class="check">Q</span>
                             <label for="quinta">quinta</label>
                         </div>
                         <div class="box">
-                            <input id="sexta" type="checkbox" name="sextas">
+                            <input id="sexta" type="checkbox" name="sexta">
                             <span class="check">S</span>
                             <label for="sexta">sexta</label>
                         </div>
                         <div class="box">
-                            <input id="sabado" type="checkbox" name="sabados">
+                            <input id="sabado" type="checkbox" name="sabado">
                             <span class="check">S</span>
                             <label for="sabado">sabado</label>
                         </div>
