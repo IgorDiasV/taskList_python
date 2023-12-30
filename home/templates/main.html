@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        .green{
+            background: green;
+        }
+        .red{
+            background: red;
+        }
+        .gray{
+            background: gray;
+        }
         .modal-container {
             width: 100vw;
             height: 100vh;
@@ -316,7 +325,7 @@
             <form action="{% url 'addtask'%}" method='POST' id='form_addtask'>
                 {% csrf_token %}
                 <div class="bloco_form"><input type="text" id='titulo' class="input_titulo" placeholder="Título"
-                        name="nomes"></div>
+                        name="assunto"></div>
                 <div class="bloco_form">
                     <input type="text" id='hora' class="input_hora" placeholder="Hora" name="horas">
                     <input type="text" id='tempo' class="input_tempo" placeholder="Tempo" name="intervalos">
@@ -399,22 +408,21 @@
             </section>
         </div>
 
-
-        <div class="container_tarefas">
-            <div class="letras_tarefas">
-                <p>exemplo tarefa</p>
-                <p>10 MIM</p>
+        {% for task in dict_tasks %}
+        
+    
+            <div class="container_tarefas">
+                <div class="letras_tarefas">
+                    <p>{{task.assunto}}</p>
+                    <p>10 MIM</p>
+                </div>
+                <section class="tarefas">
+                    {% for class in task.colors %}
+                        <div class="bloco_dias {{class}}"></div>
+                    {% endfor %}
+                </section>
             </div>
-            <section class="tarefas">
-                <div class="bloco_dias"></div>
-                <div class="bloco_dias"></div>
-                <div class="bloco_dias"></div>
-                <div class="bloco_dias"></div>
-                <div class="bloco_dias"></div>
-                <div class="bloco_dias"></div>
-                <div class="bloco_dias"></div>
-            </section>
-        </div>
+        {% endfor %}
         <a><button>Deletar</button></a>
     </div>
 
