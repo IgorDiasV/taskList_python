@@ -37,6 +37,7 @@ def home(request):
     tasks = Task.objects.all()
     dict_tasks = []
     for task in tasks:
+        att_task(task)
         colors_days = get_colors_days(task)
         aux_dict = {}
         aux_dict = {'colors': colors_days,
