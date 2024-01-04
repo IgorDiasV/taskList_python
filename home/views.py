@@ -10,7 +10,8 @@ def att_task(task):
         day_of_task = task.task_day.filter(day=day)
         if day_of_task:
             if not done_this_week(day_of_task[0].done_at):
-                task.done = False
+                day_of_task[0].done = False
+                day_of_task[0].save()
                  
     
 def get_colors_days(task):
