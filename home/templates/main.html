@@ -313,6 +313,30 @@
                 });
             }
         }
+        function change_color(div_task){
+            let classes_div = div_task.classList
+            let list_classes_div = Array.from(classes_div);
+            let cor = list_classes_div[1]
+
+            let done = div_task.getAttribute('done')
+
+            if (done == 'False'){
+                div_task.setAttribute('done', "True")
+            }else{
+                div_task.setAttribute('done', "False")
+            }
+
+            if(cor == 'red'){
+                div_task.classList.remove('red')
+                div_task.classList.add('green')
+            }else if(cor=='green'){
+                div_task.classList.remove('green')
+                div_task.classList.add('red')
+            }else if(cor!='gray'){
+                div_task.classList.add('green')
+            }
+
+        }
 
     </script>
 </head>
