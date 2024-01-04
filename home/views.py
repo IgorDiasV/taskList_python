@@ -12,15 +12,18 @@ def att_task(task):
             if not done_this_week(day_of_task[0].done_at):
                 day_of_task[0].done = False
                 day_of_task[0].save()
+            
                  
     
-def get_colors_days(task):
+def get_colors_dones(task):
    
     class_colors = []
+    list_dones = []
     for day in days:
         day_of_tasck = task.task_day.filter(day=day)
                
         if day_of_tasck:
+            list_dones.append(day_of_tasck[0].done)
             if day_of_tasck[0].done:
                      class_colors.append("green")
             else:
@@ -30,18 +33,20 @@ def get_colors_days(task):
                     class_colors.append("")
         else:
              class_colors.append("gray")
+             list_dones.append(False)
 
-    return class_colors
+
+    return class_colors, list_dones
 
 def home(request):
     tasks = Task.objects.all()
     dict_tasks = []
     for task in tasks:
         att_task(task)
-        colors_days = get_colors_days(task)
+        colors, dones = get_colors_dones(task)
         aux_dict = {}
-        aux_dict = {'colors': colors_days,
-                             'assunto': task.task_name}
+        aux_dict = {'colors_dones': zip(colors, dones),
+                    'assunto': task.task_name}
         dict_tasks.append(aux_dict)
 
 

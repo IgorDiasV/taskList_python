@@ -417,8 +417,8 @@
                     <p>10 MIM</p>
                 </div>
                 <section class="tarefas">
-                    {% for class in task.colors %}
-                        <div class="bloco_dias {{class}}"></div>
+                    {% for class, done in task.colors_dones %}                 
+                        <div class="bloco_dias {{class}}" onclick="change_color(this)" done={{done}}></div>                    
                     {% endfor %}
                 </section>
             </div>
