@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <script>
-
+        let alteracoes = new Map()
         function iniciaModal() {
             
             modalID = 'modal_add_task'
@@ -28,13 +28,19 @@
             let classes_div = div_task.classList
             let list_classes_div = Array.from(classes_div);
             let cor = list_classes_div[1]
-
+            let id = div_task.getAttribute('task_id')
             let done = div_task.getAttribute('done')
 
             if (done == 'False'){
-                div_task.setAttribute('done', "True")
+                done = 'True'
+       
             }else{
-                div_task.setAttribute('done', "False")
+                done = "False"
+            }
+            div_task.setAttribute('done', done)
+
+            if (id != 'none'){
+                alteracoes.set(id, done)
             }
 
             if(cor == 'red'){
@@ -47,6 +53,29 @@
                 div_task.classList.add('green')
             }
 
+        }
+
+        function save(){
+            var formulario = document.createElement('form');
+            formulario.setAttribute('id', 'formularioDinamico');
+            formulario.setAttribute('method', 'post');
+            formulario.setAttribute('action', '{% url 'save'%}');
+
+            var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+            var inputCSRF = document.createElement('input');
+            inputCSRF.setAttribute('type', 'hidden');
+            inputCSRF.setAttribute('name', 'csrfmiddlewaretoken');
+            inputCSRF.value = csrfToken;
+
+            var inputMapData = document.createElement('input');
+            inputMapData.setAttribute('type', 'hidden');
+            inputMapData.setAttribute('name', 'mapData');
+            inputMapData.value = JSON.stringify(alteracoes);
+
+            formulario.appendChild(inputMapData);
+            formulario.appendChild(inputCSRF); 
+            document.body.appendChild(formulario);
+            formulario.submit();
         }
 
     </script>
@@ -115,7 +144,7 @@
     <div class="container">
         <div class="btn">
             <button onclick="iniciaModal()" class="buttonADD">ADD TASK</button>
-            <button onclick="enviarAlteracoes()" class="buttonSave">Salvar</button>
+            <button onclick="save()" class="buttonSave">Salvar</button>
         </div>
 
         <div class="titulo">
@@ -153,8 +182,8 @@
                     <p>10 MIM</p>
                 </div>
                 <section class="tarefas">
-                    {% for class, done in task.colors_dones %}                 
-                        <div class="bloco_dias {{class}}" onclick="change_color(this)" done={{done}}></div>                    
+                    {% for id, class, done in task.colors_dones %}                 
+                        <div task_id={{id}} class="bloco_dias {{class}}" onclick="change_color(this)" done={{done}}></div>                    
                     {% endfor %}
                 </section>
             </div>
