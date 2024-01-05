@@ -169,7 +169,16 @@
             border-radius: 8px;
             cursor: pointer;
         }
-
+        .buttonSave{
+            padding: 8px 20px;
+            width: 150px;
+            margin: 18px 0 9px 0;
+            color: white;
+            background-color: green;
+            border: 3px solid green;
+            border-radius: 8px;
+            cursor: pointer;
+        }
         .titulo {
             width: 912px;
             padding-right: 8px;
@@ -404,6 +413,7 @@
     <div class="container">
         <div class="btn">
             <button onclick="iniciaModal()" class="buttonADD">ADD TASK</button>
+            <button onclick="enviarAlteracoes()" class="buttonSave">Salvar</button>
         </div>
 
         <div class="titulo">
@@ -450,7 +460,7 @@
         <a><button>Deletar</button></a>
     </div>
 
-    <button onclick="enviarAlteracoes()">Salvar</button>
+    
 </body>
 
 </html>
