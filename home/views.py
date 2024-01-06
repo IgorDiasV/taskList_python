@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Task, TaskDay
 from .utils import get_days_to_add, done_this_week, out_of_date
+import json
+from datetime import datetime
 
 days = ['domingo', 'segunda', 'terca', 'quarta' ,'quinta' ,'sexta', 'sabado']
 
@@ -68,5 +70,17 @@ def addTask(request):
     return redirect("home")
 
 def save(request):
-    print("chegou")
+    alteracoes = json.loads(request.POST.get("mapData"))
+    for id_altercao in alteracoes:
+        done_str = alteracoes[id_altercao]
+        done = False
+
+        if done_str == 'True':
+            done = True
+
+        task_day = TaskDay.objects.filter(id=int(id_altercao)).first()
+        task_day.done = done
+        task_day.done_at = datetime.now()
+        task_day.save()
+        
     return redirect('home')

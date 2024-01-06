@@ -70,8 +70,7 @@
             var inputMapData = document.createElement('input');
             inputMapData.setAttribute('type', 'hidden');
             inputMapData.setAttribute('name', 'mapData');
-            inputMapData.value = JSON.stringify(alteracoes);
-
+            inputMapData.value = JSON.stringify(Object.fromEntries(alteracoes));
             formulario.appendChild(inputMapData);
             formulario.appendChild(inputCSRF); 
             document.body.appendChild(formulario);
