@@ -176,18 +176,18 @@
         
     
             <div class="container_tarefas">
+                <button class="close-button">&#10006;</button>  
                 <div class="letras_tarefas">
                     <p>{{task.assunto}}</p>
                     <p>10 MIM</p>
                 </div>
                 <section class="tarefas">
-                    {% for id, class, done in task.colors_dones %}                 
+                    {% for id, class, done in task.colors_dones %}               
                         <div task_id={{id}} class="bloco_dias {{class}}" onclick="change_color(this)" done={{done}}></div>                    
                     {% endfor %}
                 </section>
             </div>
         {% endfor %}
-        <a><button>Deletar</button></a>
     </div>
 
     
