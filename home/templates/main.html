@@ -77,6 +77,28 @@
             formulario.submit();
         }
 
+        function deletar(id){
+            var formulario = document.createElement('form');
+            formulario.setAttribute('id', 'formularioDinamico');
+            formulario.setAttribute('method', 'post');
+            formulario.setAttribute('action', '{% url 'delete'%}');
+
+            var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+            var inputCSRF = document.createElement('input');
+            inputCSRF.setAttribute('type', 'hidden');
+            inputCSRF.setAttribute('name', 'csrfmiddlewaretoken');
+            inputCSRF.value = csrfToken;
+
+            var inputID = document.createElement('input');
+            inputID.setAttribute('type', 'hidden');
+            inputID.setAttribute('name', 'id');
+            inputID.value = id;
+            formulario.appendChild(inputID);
+            formulario.appendChild(inputCSRF); 
+            document.body.appendChild(formulario);
+            formulario.submit();
+        }
+
     </script>
 </head>
 
@@ -176,7 +198,7 @@
         
     
             <div class="container_tarefas">
-                <button class="close-button">&#10006;</button>  
+                <button class="close-button" onclick='deletar({{task.id}})'>&#10006;</button>  
                 <div class="letras_tarefas">
                     <p>{{task.assunto}}</p>
                     <p>10 MIM</p>

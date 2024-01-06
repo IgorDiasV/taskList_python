@@ -14,11 +14,10 @@ def att_task(task):
             if not done_this_week(day_of_task[0].done_at):
                 day_of_task[0].done = False
                 day_of_task[0].save()
-            
-                 
-    
+
+
 def get_colors_dones(task):
-    
+
     ids = []
     class_colors = []
     list_dones = []
@@ -28,19 +27,19 @@ def get_colors_dones(task):
             ids.append(day_of_tasck.id)  
             list_dones.append(day_of_tasck.done)
             if day_of_tasck.done:
-                     class_colors.append("green")
+                class_colors.append("green")
             else:
                 if out_of_date(day_of_tasck.day):
                     class_colors.append("red")
                 else:
                     class_colors.append("")
         else:
-             ids.append('none')
-             class_colors.append("gray")
-             list_dones.append(False)
-
+            ids.append('none')
+            class_colors.append("gray")
+            list_dones.append(False)
 
     return ids, class_colors, list_dones
+
 
 def home(request):
     tasks = Task.objects.all()
@@ -50,9 +49,9 @@ def home(request):
         ids, colors, dones = get_colors_dones(task)
         aux_dict = {}
         aux_dict = {'colors_dones': zip(ids, colors, dones),
-                    'assunto': task.task_name}
+                    'assunto': task.task_name,
+                    'id': task.id}
         dict_tasks.append(aux_dict)
-
 
     return render(request, "main.html", {'dict_tasks': dict_tasks})
 
@@ -69,6 +68,7 @@ def addTask(request):
 
     return redirect("home")
 
+
 def save(request):
     alteracoes = json.loads(request.POST.get("mapData"))
     for id_altercao in alteracoes:
@@ -82,5 +82,15 @@ def save(request):
         task_day.done = done
         task_day.done_at = datetime.now()
         task_day.save()
-        
+
+    return redirect('home')
+
+
+def delete(request):
+    id = request.POST.get("id")
+
+    task = Task.objects.filter(id=int(id)).first()
+
+    task.delete()
+
     return redirect('home')
