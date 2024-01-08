@@ -233,9 +233,9 @@
         {% endfor %}
         <div class="overlay" id="overlay"></div>
         <div class="confirmation-dialog" id="confirmationDialog">
-            <p>Tem certeza de que deseja excluir esta tarefa?</p>
-            <button onclick="deleteTask()">Sim, excluir</button>
-            <button onclick="cancelDelete()">Cancelar</button>
+            <p>Tem certeza de que deseja excluir a tarefa?</p>
+            <button class="confirmed-delete" onclick="deleteTask()">Sim, excluir</button>
+            <button class="cancel-delete" onclick="cancelDelete()">Cancelar</button>
         </div>
     </div>
 
