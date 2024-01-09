@@ -50,7 +50,8 @@ def home(request):
         aux_dict = {}
         aux_dict = {'colors_dones': zip(ids, colors, dones),
                     'assunto': task.task_name,
-                    'id': task.id}
+                    'id': task.id,
+                    'duracao': task.duration}
         dict_tasks.append(aux_dict)
 
     return render(request, "main.html", {'dict_tasks': dict_tasks})
@@ -58,9 +59,11 @@ def home(request):
 
 def addTask(request):
     assunto = request.POST['assunto']
+    duracao = request.POST['duracao']
     days_to_make = get_days_to_add(request, days)
 
-    task = Task.objects.create(task_name=assunto)
+    task = Task.objects.create(task_name=assunto,
+                               duration=duracao)
 
     for day in days_to_make:
         taks_day = TaskDay.objects.create(day=day, done=False)

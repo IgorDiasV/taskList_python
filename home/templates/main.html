@@ -130,14 +130,12 @@
             <h3 class="subtitulo">Nova tarefa:</h3>
             <form action="{% url 'addtask'%}" method='POST' id='form_addtask'>
                 {% csrf_token %}
-                <div class="bloco_form"><input type="text" id='titulo' class="input_titulo" placeholder="Título"
-                        name="assunto"></div>
                 <div class="bloco_form">
-                    <input type="text" id='hora' class="input_hora" placeholder="Hora" name="horas">
-                    <input type="text" id='tempo' class="input_tempo" placeholder="Tempo" name="intervalos">
-                    <input type="checkbox" id='repeticao' class="input_repeticao" placeholder="repeticao"
-                        name="replays">
+                    <input type="text" id='titulo' class="input_titulo" placeholder="Título" name="assunto">
+                    <input type="number" id='tempo' class="input_tempo" placeholder="Duração(min)" name="duracao">
                 </div>
+                    
+                
                 <div id="maior">
 
                     <div>
@@ -222,7 +220,7 @@
                 <button class="close-button" onclick='confirmDelete({{task.id}})'>&#10006;</button>  
                 <div class="letras_tarefas">
                     <p>{{task.assunto}}</p>
-                    <p>10 MIM</p>
+                    <p>{{task.duracao}} MIM</p>
                 </div>
                 <section class="tarefas">
                     {% for id, class, done in task.colors_dones %}               

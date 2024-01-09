@@ -257,25 +257,13 @@ body {
     outline: none;
 }
 
-.input_hora {
-    width: 90px;
-    height: 12px;
-    padding: 10px;
-    border: 1px solid #C4C4C4;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    border-radius: 10px;
-    outline: none;
-}
 
 .input_tempo {
-    width: 90px;
-    height: 12px;
+    width: 95px;
+    height: 15px;
     padding: 10px;
     border: 1px solid #C4C4C4;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px auto;
     border-radius: 10px;
     outline: none;
 }
