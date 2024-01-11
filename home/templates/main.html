@@ -131,8 +131,8 @@
             <form action="{% url 'addtask'%}" method='POST' id='form_addtask'>
                 {% csrf_token %}
                 <div class="bloco_form">
-                    <input type="text" id='titulo' class="input_titulo" placeholder="Título" name="assunto">
-                    <input type="number" id='tempo' class="input_tempo" placeholder="Duração(min)" name="duracao">
+                    <input type="text" id='titulo' class="input_titulo" placeholder="Título" name="task_name">
+                    <input type="number" id='tempo' class="input_tempo" placeholder="Duração(min)" name="duration">
                 </div>
                     
                 

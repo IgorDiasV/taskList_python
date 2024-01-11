@@ -58,12 +58,12 @@ def home(request):
 
 
 def addTask(request):
-    assunto = request.POST['assunto']
-    duracao = request.POST['duracao']
+    task_name = request.POST['task_name']
+    duration = request.POST['duration']
     days_to_make = get_days_to_add(request, days)
 
-    task = Task.objects.create(task_name=assunto,
-                               duration=duracao)
+    task = Task.objects.create(task_name=task_name,
+                               duration=duration)
 
     for day in days_to_make:
         taks_day = TaskDay.objects.create(day=day, done=False)
