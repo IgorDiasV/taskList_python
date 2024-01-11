@@ -219,8 +219,8 @@
             <div class="container_tarefas">
                 <button class="close-button" onclick='confirmDelete({{task.id}})'>&#10006;</button>  
                 <div class="letras_tarefas">
-                    <p>{{task.assunto}}</p>
-                    <p>{{task.duracao}} MIM</p>
+                    <p>{{task.task_name}}</p>
+                    <p>{{task.duration}} MIM</p>
                 </div>
                 <section class="tarefas">
                     {% for id, class, done in task.colors_dones %}               

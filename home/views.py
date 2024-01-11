@@ -49,9 +49,9 @@ def home(request):
         ids, colors, dones = get_colors_dones(task)
         aux_dict = {}
         aux_dict = {'colors_dones': zip(ids, colors, dones),
-                    'assunto': task.task_name,
+                    'task_name': task.task_name,
                     'id': task.id,
-                    'duracao': task.duration}
+                    'duration': task.duration}
         dict_tasks.append(aux_dict)
 
     return render(request, "main.html", {'dict_tasks': dict_tasks})
