@@ -1,10 +1,11 @@
 from datetime import datetime, timedelta
-
+from django.core.handlers.wsgi import WSGIRequest
+from .models import Task
 
 days = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado']
 
 
-def get_days_to_add(request, list_days: list):
+def get_days_to_add(request: WSGIRequest, list_days: list[str]):
     days_to_make = []
     for day in list_days:
         status = request.POST.get(day, False)
@@ -13,17 +14,16 @@ def get_days_to_add(request, list_days: list):
     return days_to_make
 
 
-def last_day_of_the_week(data):
+def last_day_of_the_week(data: str):
     data_obj = datetime.strptime(data, '%Y-%m-%d')
 
     dias_ate_sabado = (5 - data_obj.weekday() + 7) % 7
 
     ultimo_dia_semana = data_obj + timedelta(days=dias_ate_sabado)
-
     return ultimo_dia_semana
 
 
-def done_this_week(done_at):
+def done_this_week(done_at: datetime):
     if done_at:
         done_at = done_at.replace(tzinfo=None)
         now = datetime.now().strftime('%Y-%m-%d')
@@ -34,7 +34,7 @@ def done_this_week(done_at):
     return False
 
 
-def out_of_date(day_of_task):
+def out_of_date(day_of_task: str):
     dict_days = {'domingo': 0,
                  'segunda': 1,
                  'terca': 2,
@@ -59,7 +59,7 @@ def out_of_date(day_of_task):
     return False
 
 
-def att_task(task):
+def att_task(task: Task):
     for day in days:
         day_of_task = task.task_day.filter(day=day)
         if day_of_task:
@@ -68,7 +68,7 @@ def att_task(task):
                 day_of_task[0].save()
 
 
-def get_colors_dones(task):
+def get_colors_dones(task: Task):
 
     ids = []
     class_colors = []
